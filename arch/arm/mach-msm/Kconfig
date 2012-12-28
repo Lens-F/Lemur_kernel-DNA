@@ -1752,6 +1752,7 @@ config MSM_CPU_FREQ_MIN
 
 endif # CPU_FREQ_MSM
 
+<<<<<<< HEAD
 config GPU_OVERCLOCK
 	bool "Enable GPU Overclocking option"
 	default n
@@ -1769,6 +1770,13 @@ config LOW_CPUCLOCKS
 	default n
 	help
 	  Ultra low cpu frequencies enabled for CPU and L2 Cache
+=======
+config INTELLI_PLUG
+	bool "Enable intelli-plug cpu hotplug driver"
+	default n
+	help
+	  Generic Intelli-plug cpu hotplug driver for ARM SOCs
+>>>>>>> 4092c4d... intelli_plug: intelligent hotplug cpu driver with eco mode
 
 config MSM_CPUFREQ_LIMITER
 	tristate "MSM CPU frequency limiter"
