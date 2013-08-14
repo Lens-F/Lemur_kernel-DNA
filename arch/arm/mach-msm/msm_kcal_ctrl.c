@@ -22,7 +22,10 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kallsyms.h>
+<<<<<<< HEAD
 #include <linux/earlysuspend.h>
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 
 #include "../../../drivers/video/msm/mdp.h"
 
@@ -42,12 +45,19 @@ struct kcal_platform_data {
 	int (*refresh_display) (void);
 };
 
+<<<<<<< HEAD
 static bool lut_updated = false; 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 static struct kcal_platform_data *kcal_ctrl_pdata;
 static int last_status_kcal_ctrl;
 
 /* pixel order : RBG */
+<<<<<<< HEAD
 static unsigned int lcd_rgb_linear_lut[256] = {
+=======
+static unsigned int lcd_color_preset_lut[256] = {
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 	/* default linear qlut */
 	0x00000000, 0x00010101, 0x00020202, 0x00030303,
 	0x00040404, 0x00050505, 0x00060606, 0x00070707,
@@ -115,6 +125,7 @@ static unsigned int lcd_rgb_linear_lut[256] = {
 	0x00fcfcfc, 0x00fdfdfd, 0x00fefefe, 0x00ffffff
 };
 
+<<<<<<< HEAD
 /* pixel order : RBG */
 static unsigned int lcd_rgb_working_lut[256] = {
 	/* default linear qlut */
@@ -352,6 +363,8 @@ static ssize_t kgamma_reset_show(struct device *dev,
 	return 0;
 }
 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 static struct kcal_data kcal_value = {255, 255, 255};
 
 static int update_lcdc_lut(void)
@@ -367,7 +380,11 @@ static int update_lcdc_lut(void)
 	cmap.green = (uint16_t *)&(kcal_value.green);
 	cmap.blue = (uint16_t *)&(kcal_value.blue);
 
+<<<<<<< HEAD
 	ret = mdp_preset_lut_update_lcdc(&cmap, lcd_rgb_working_lut);
+=======
+	ret = mdp_preset_lut_update_lcdc(&cmap, lcd_color_preset_lut);
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 
 	//if (ret)
 	//	pr_err("%s: failed to set lut! %d\n", __func__, ret);
@@ -396,6 +413,7 @@ static int kcal_refresh_values(void)
         return update_lcdc_lut();
 }
 
+<<<<<<< HEAD
 static bool calc_checksum(unsigned int a, unsigned int b,
 			unsigned int c, unsigned int d)
 {
@@ -410,22 +428,32 @@ static bool calc_checksum(unsigned int a, unsigned int b,
 	}
 }
 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 static ssize_t kcal_store(struct device *dev, struct device_attribute *attr,
 						const char *buf, size_t count)
 {
 	int kcal_r = 0;
 	int kcal_g = 0;
 	int kcal_b = 0;
+<<<<<<< HEAD
 	int chksum = 0;
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 
 	if (!count)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	sscanf(buf, "%d %d %d %d", &kcal_r, &kcal_g, &kcal_b, &chksum);
 	chksum = (chksum & 0x0000ff00) >> 8;
 
 	if (calc_checksum(kcal_r, kcal_g, kcal_b, chksum))
 		kcal_ctrl_pdata->set_values(kcal_r, kcal_g, kcal_b);
+=======
+	sscanf(buf, "%d %d %d", &kcal_r, &kcal_g, &kcal_b);
+	kcal_ctrl_pdata->set_values(kcal_r, kcal_g, kcal_b);
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 	return count;
 }
 
@@ -478,8 +506,11 @@ static ssize_t kcal_version_show(struct device *dev,
 			KCAL_CTRL_MINOR_VERSION);
 }
 
+<<<<<<< HEAD
 static DEVICE_ATTR(power_reset, 0644, kgamma_reset_show, kgamma_reset_store); 
 static DEVICE_ATTR(power_line, 0644, kgamma_show, kgamma_store); 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 static DEVICE_ATTR(power_rail, 0644, kcal_show, kcal_store);
 static DEVICE_ATTR(power_rail_ctrl, 0644, kcal_ctrl_show, kcal_ctrl_store);
 static DEVICE_ATTR(power_rail_version, 0444, kcal_version_show, NULL);
@@ -495,12 +526,15 @@ static int kcal_ctrl_probe(struct platform_device *pdev)
 		return -1;
 	}
 
+<<<<<<< HEAD
 	rc = device_create_file(&pdev->dev, &dev_attr_power_reset);
 	if(rc !=0)
 		return -1;
 	rc = device_create_file(&pdev->dev, &dev_attr_power_line);
 	if(rc !=0)
 		return -1;
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 	rc = device_create_file(&pdev->dev, &dev_attr_power_rail);
 	if(rc !=0)
 		return -1;
@@ -540,6 +574,7 @@ static struct platform_driver this_driver = {
 
 typedef int (*funcPtr)(void);
 
+<<<<<<< HEAD
 static void msm_kcal_early_suspend(struct early_suspend *handler)
 {
 
@@ -557,6 +592,8 @@ static struct early_suspend msm_kcal_early_suspend_struct_driver = {
         .resume = msm_kcal_late_resume,
 };
 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 int __init kcal_ctrl_init(void)
 {
 #if 0
@@ -577,8 +614,11 @@ int __init kcal_ctrl_init(void)
 	platform_add_devices(msm_panel_devices,
 		ARRAY_SIZE(msm_panel_devices));
 
+<<<<<<< HEAD
 	register_early_suspend(&msm_kcal_early_suspend_struct_driver);
 
+=======
+>>>>>>> 100c4c3... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
 	//pr_info("generic kcal ctrl initialized\n");
 	//pr_info("generic kcal ctrl version %d.%d\n",
 	//	KCAL_CTRL_MAJOR_VERSION,
