@@ -27,7 +27,7 @@
   m=$k/out/$c/system/lib/modules
   z=$c-$today
 
-TOOLCHAIN=/home/TheEdge/Desktop/linaro/bin/arm-eabi-
+TOOLCHAIN=/home/tal/linaro/bin/arm-eabi-
 export ARCH=arm
 export SUBARCH=arm
 
