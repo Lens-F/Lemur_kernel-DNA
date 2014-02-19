@@ -594,8 +594,5 @@ obj-$(CONFIG_IOEXTENDER) += ADP5585_ioextender.o
 obj-y += htc_cpu_usage_stats.o
 
 obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
-<<<<<<< HEAD
 obj-$(CONFIG_MSM_CPUFREQ_LIMITER) += cpufreq_limit.o
-=======
 obj-$(CONFIG_LCD_KCAL) += msm_kcal_ctrl.o
->>>>>>> e6be5ca... msm_kcal_ctrl: initial code for generic MSM LCD temperature calibrations
