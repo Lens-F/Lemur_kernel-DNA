@@ -2808,13 +2808,6 @@ void __init monarudo_init_cam(void)
 		msm_gpiomux_install(monarudo_cam_common_configs_xc,
 				ARRAY_SIZE(monarudo_cam_common_configs_xc));
 	}
-
-	if (system_rev == XA || system_rev == XB) {
-		platform_device_register(&monarudo_msm_rawchip_device);
-	} else if (system_rev >= XC) {	
-		pr_info("system_rev=xc,monarudo_msm_rawchip_device_xc");
-		platform_device_register(&monarudo_msm_rawchip_device_xc);
-	}
 	
 	platform_device_register(&msm_camera_server);
     platform_device_register(&msm8960_device_i2c_mux_gsbi4);
