@@ -523,10 +523,7 @@ config LAGFREE_FREQ_STEP_DOWN
 config LAGFREE_FREQ_SLEEP_MAX
 	int "Max Sleep frequeny"
 	default 384000
-	depends on CPU_FREQ_GOV_LAGFREEconfig CPU_FREQ_DEFAULT_GOV_WREXY
-  	bool "wrexy"
-  	select CPU_FREQ_GOV_WREXY
-  	help
+	depends on CPU_FREQ_GOV_LAGFREE
 	help
 	  Max freqeuncy for screen off.
 
